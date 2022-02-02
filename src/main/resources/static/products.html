@@ -1,1 +1,63 @@
-<h1>Productos 2</h1>
+
+<style>
+    .row .footer {
+        margin-top: 10px;
+    }
+</style>
+
+<div ng-init="ctrlLogin.findAll()"></div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            PRODUCTOS
+        </div>
+        <div class="card-body">
+            <div class="col d-flex justify-content-between bg-white border-bottom" >
+                <h5 class="card-title">LISTADO DE PRODUCTOS</h5>
+                <div>
+                      <a href="#!/products/create" type="button" class="btn btn-primary mb-4">
+                        <i class="fas fa-plus"></i>
+                        <span class="d-sm-none d-md-none d-lg-inline d-xl-inline">
+                          NUEVO PRODUCTO
+                        </span>
+                      </a>
+                </div>
+            </div>
+            <div class="mt-3 table-responsive">
+                <table aria-describedby="REGISTROS DE DOCUMENTOS" class="table table-striped table-hover" id="productsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col" class="text-end"></th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in listProducts">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.price}}</td>
+                            <td>{{ item.total}}</td>
+                            <td>{{ item.description}}</td>
+                            <td>
+                                <div class="text-end">
+                                    <a ng-href="#!/config/templates/terminationInadmissibility/create/{{item.id}}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                        <span class="d-sm-none d-md-none d-lg-inline d-xl-inline">
+                                          Editar
+                                        </span>
+                                    </a>  
+                                </div>   
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -14,10 +14,27 @@ angular.module("routingApp").controller("LoginCtrl", [
         },
       });
   
-      this.sayHello = function(){
-        notyf.error("Usuario y/o Contraseña Incorrecto");
-        console.log("Hola");
-      }
+      this.findAll = () => {
+        return $http({
+            method: 'GET',
+            url: APP_URL.url + "/product",
+            headers: {
+            },
+            }).then((res) => {
+            setTimeout(executeDataTable, 1);
+            $scope.listProducts = res.data;
+            }).catch((e)=>{
+            console.log(e);
+        })
+    }
+
+    function executeDataTable() {
+      $('#productsTable').DataTable({
+      language: {
+          url: '//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json',
+      },
+      });
+  }
     },
   ]);
   
