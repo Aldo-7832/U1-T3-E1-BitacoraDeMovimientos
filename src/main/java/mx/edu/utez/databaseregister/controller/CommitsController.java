@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.edu.utez.databaseregister.service.ProductService;
-import mx.edu.utez.databaseregister.entity.Product;
+import mx.edu.utez.databaseregister.service.CommitsService;
+import mx.edu.utez.databaseregister.entity.Commits;
 
 @RestController
-@RequestMapping(path = "/product")
-public class ProductController {
+@RequestMapping(path = "/commits")
+public class CommitsController {
     
     @Autowired
-    private ProductService productService;
+    private CommitsService commitsService;
 
     @GetMapping()
-    public List<Product> findAllCompany() {
-        return productService.findAll();
+    public List<Commits> findAllCompany() {
+        return commitsService.findAll();
     }
 
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
-    public Product saveCompany(@RequestBody Product obj) {
+    public Commits saveCompany(@RequestBody Commits obj) {
         try {
-            return productService.save(obj);
+            return commitsService.save(obj);
         } catch (Exception e) {
             return null;
         }
