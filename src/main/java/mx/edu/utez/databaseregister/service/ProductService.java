@@ -27,4 +27,14 @@ public class ProductService {
         return obj;
     }
 
+    public boolean delete(Product product) {
+        try {
+            productRepository.delete(product);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 }

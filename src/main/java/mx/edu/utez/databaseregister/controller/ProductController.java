@@ -3,7 +3,9 @@ package mx.edu.utez.databaseregister.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +32,19 @@ public class ProductController {
             return productService.save(obj);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @PostMapping(value = "/delete")
+    public boolean delete(@RequestBody Product product) {
+        System.out.println("NOMBRE: " + product.getName());
+        try {
+            boolean flag = false;
+            flag = productService.delete(product);
+            return flag ? true : false;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 }

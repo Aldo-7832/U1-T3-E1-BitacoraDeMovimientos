@@ -46,12 +46,19 @@
                             <td>{{ item.total}}</td>
                             <td>{{ item.description}}</td>
                             <td>
-                                <span
-                                    class="{{item.total >= 1 ? 'badge bg-success' : 'badge bg-danger'}} ">{{item.total >= 1 ? 'Disponible' : 'No disponible'}}
+                                <span class="{{item.total >= 1 ? 'badge bg-success' : 'badge bg-danger'}} ">{{item.total
+                                    >= 1 ? 'Disponible' : 'No disponible'}}
                                 </span>
                             </td>
                             <td>
                                 <div class="text-end">
+                                    <button type="button" ng-click="ctrlLogin.selectProduct(item)"
+                                        class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deleteProductModal">
+                                        <i class="far fa-trash"></i><span
+                                            class="d-sm-none d-md-none d-lg-inline d-xl-inline">
+                                            Eliminar</span>
+                                    </button>
                                     <a ng-href="#!/products/form" class="btn btn-primary"
                                         ng-click="ctrlLogin.updateText(item)">
                                         <i class="fas fa-edit"></i>
@@ -69,3 +76,28 @@
 
     </div>
 </div>
+
+<div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModal" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <h1 class="fa-5x"><i class="fa fa-exclamation-triangle text-danger"></i></h1>
+          <h4>¿Desea eliminar este producto?</h4>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal">
+            <i class="fa fa-times"></i> Cancelar
+          </button>
+          <button class="btn btn-danger" data-bs-dismiss="modal"
+          ng-click="ctrlLogin.deleteProduct()">
+            <i class="fa fa-trash"></i>
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
