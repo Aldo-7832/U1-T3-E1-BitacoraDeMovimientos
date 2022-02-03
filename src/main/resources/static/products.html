@@ -16,7 +16,7 @@
             <div class="col d-flex justify-content-between bg-white border-bottom" >
                 <h5 class="card-title">LISTADO DE PRODUCTOS</h5>
                 <div>
-                      <a href="#!/products/create" type="button" class="btn btn-primary mb-4">
+                      <a href="#!/products/form" type="button" class="btn btn-primary mb-4" ng-click="ctrlLogin.createText()">
                         <i class="fas fa-plus"></i>
                         <span class="d-sm-none d-md-none d-lg-inline d-xl-inline">
                           NUEVO PRODUCTO
@@ -45,7 +45,7 @@
                             <td>{{ item.description}}</td>
                             <td>
                                 <div class="text-end">
-                                    <a ng-href="#!/config/templates/terminationInadmissibility/create/{{item.id}}" class="btn btn-primary">
+                                    <a ng-href="#!/products/form" class="btn btn-primary" ng-click="ctrlLogin.updateText(item)">
                                         <i class="fas fa-edit"></i>
                                         <span class="d-sm-none d-md-none d-lg-inline d-xl-inline">
                                           Editar

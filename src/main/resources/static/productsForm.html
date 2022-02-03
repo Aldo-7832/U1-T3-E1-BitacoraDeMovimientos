@@ -1,0 +1,58 @@
+<div ng-init="ctrlLogin.setMessage()"></div>
+<div class="mb-4" id="createView">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h6>{{titulo}}</h6>
+            </div>
+            <form novalidate class="needs-validation">
+                <div class="card-body" id="example">
+                    <div class="row g-2">
+                        <h6><b>INFORMACIÓN DEL PRODUCTO</b></h6>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" ng-model="product.name" class="form-control mt-1"
+                                id="nombre" placeholder="Nombre del Producto" autocomplete="off" />
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="price">Precio</label>
+                            <input type="text" ng-model="product.price" class="form-control mt-1"
+                                id="price" placeholder="Precio Individual"
+                                autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-2">
+                        <div class="col-md-12">
+                            <label for="total">Total en Almacen</label>
+                            <input type="text" ng-model="product.total"
+                                class="form-control mt-1" id="total" placeholder="Total en Almacen" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-2">
+                        <div class="col-md-12">
+                            <label for="total">Descripción</label>
+                            <input type="text" ng-model="product.description"
+                                class="form-control mt-1" id="total" placeholder="Total en Almacen" autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <div class="ms-2">
+                        <a ng-click="ctrlLogin.cleanObjectCancel()" href="#!/products">
+                            <button class="btn btn-secondary"><i class="fas fa-times"></i>
+                                <span class="d-sm-none d-md-none d-lg-inline d-xl-inline"> Cancelar</span></button>
+                        </a>
+                    </div>
+                    <div class="ms-2">
+                        <button id="form" class="btn btn-primary" ng-click="ctrlLogin.create()"><i class="fas fa-check"></i>
+                            <span class="d-sm-none d-md-none d-lg-inline d-xl-inline"> {{boton}}</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,11 @@ angular
           controller: 'LoginCtrl',
           controllerAs: 'ctrlLogin',
         })
+        .when('/products/form', {
+          templateUrl: '/productsForm.html',
+          controller: 'LoginCtrl',
+          controllerAs: 'ctrlLogin',
+        })
         .otherwise({
           redirectTo: '/login',
         })
