@@ -22,6 +22,11 @@ angular
           controller: 'LoginCtrl',
           controllerAs: 'ctrlLogin',
         })
+        .when('/commits', {
+          templateUrl: '/view/binnacle/binnacle.html',
+          controller: 'BinnacleCtrl',
+          controllerAs: 'ctrlBinnacle',
+        })
         .otherwise({
           redirectTo: '/login',
         })

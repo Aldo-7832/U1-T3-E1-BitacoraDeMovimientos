@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.edu.utez.databaseregister.service.CommitsService;
-import mx.edu.utez.databaseregister.entity.Commits;
+import mx.edu.utez.databaseregister.service.LastLoginService;
+import mx.edu.utez.databaseregister.entity.LastLogin;
 
 @RestController
-@RequestMapping(path = "/commits")
-public class CommitsController {
+@RequestMapping(path = "/lastLogin")
+public class LastLoginController {
     
     @Autowired
-    private CommitsService commitsService;
+    private LastLoginService lastLoginService;
 
     @GetMapping()
-    public List<Commits> findAlly() {
-        return commitsService.findAll();
+    public List<LastLogin> findAlly() {
+        return lastLoginService.findAll();
     }
 
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
-    public Commits save(@RequestBody Commits obj) {
+    public LastLogin save(@RequestBody LastLogin obj) {
         try {
-            return commitsService.save(obj);
+            return lastLoginService.save(obj);
         } catch (Exception e) {
             return null;
         }
