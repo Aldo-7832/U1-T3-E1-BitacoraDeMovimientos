@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mx.edu.utez.databaseregister.repository.ILastLoginRepository;
 import mx.edu.utez.databaseregister.entity.LastLogin;
+import mx.edu.utez.databaseregister.entity.User;
 
 @Service
 public class LastLoginService {
@@ -25,6 +26,16 @@ public class LastLoginService {
             res = true;
         }
         return obj;
+    }
+
+    public boolean login(String username, String pass) {
+        boolean res = false;
+        User obj = lastLoginRepository.loginSession(username, pass);
+        System.out.println("USER: " + obj.getUsername());
+        if (!obj.equals(null)) {
+            res = true;
+        }
+        return res;
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.utez.databaseregister.service.LastLoginService;
 import mx.edu.utez.databaseregister.entity.LastLogin;
+import mx.edu.utez.databaseregister.entity.User;
 
 @RestController
 @RequestMapping(path = "/lastLogin")
@@ -31,5 +34,10 @@ public class LastLoginController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @PostMapping(value = "/login/{username}/{pass}")
+    public boolean login(@PathVariable String username, @PathVariable String pass) {
+        return lastLoginService.login(username, pass);
     }
 }

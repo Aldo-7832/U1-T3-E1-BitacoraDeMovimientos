@@ -14,6 +14,12 @@ var productDelete = {
   total: null,
   description: null
 };
+
+var user = {
+  id: 0,
+  username: null,
+  pass: null
+};
 angular.module("routingApp").controller("LoginCtrl", [
   "$rootScope",
   "$scope",
@@ -37,6 +43,12 @@ angular.module("routingApp").controller("LoginCtrl", [
       total: null,
       description: null
     }
+
+    // $scope.user = {
+    //   id: null,
+    //   username: null,
+    //   pass: null
+    // }
 
     this.createText = function () {
       action = 1;
@@ -105,21 +117,40 @@ angular.module("routingApp").controller("LoginCtrl", [
       productDelete = item;
     }
 
-    this.deleteProduct = function () {
-      console.log("LLEGA AL METODO DE DESCARGA");
+    this.inicioSesion = function () {
+      user = $scope.user;
       return $http({
-          method: 'POST',
-          url: APP_URL.url + "/product/delete",
-          headers: {
-          },
-          data: productDelete
+        method: 'POST',
+        url: APP_URL.url + "/lastLogin/login/"+$scope.user.username+"/"+$scope.user.pass,
+        headers: {
+        },
       }).then((res) => {
-         this.findAll();
-         $('#productsTable').DataTable().destroy();
+        console.log(res.data);
+        if (res.data) {
+          notyf.success('¡BIENVENIDO!');
+        } else {
+          notyf.error('USUARIO INCORRECTO');
+        }
       }, (error) => {
-          notyf.error('Ha ocurrido un error inesperado' + error);
+        notyf.error('Ha ocurrido un error inesperado');
       })
-  }
+    }
+
+    this.deleteProduct = function () {
+      return $http({
+        method: 'POST',
+        url: APP_URL.url + "/product/delete",
+        headers: {
+        },
+        data: productDelete
+      }).then((res) => {
+        this.findAll();
+        $('#productsTable').DataTable().destroy();
+      }, (error) => {
+        notyf.error('Ha ocurrido un error inesperado' + error);
+      })
+    }
+
 
     function executeDataTable() {
       $('#productsTable').DataTable({

@@ -1,7 +1,21 @@
-<h1>Este es el login</h1>
-<a href="#!/products" class="btn btn-secondary mb-2" ng-click="ctrlLogin.sayHello()">
-    <i class="fas fa-download"></i>
-    <span class="d-sm-none d-md-none d-lg-inline d-xl-inline">
-      DESCARGAR DOCUMENTO
-    </span>
-  </a>
+<div class="container w-75 mt-5 rounded shadow">
+  <div class="row align-items-stretch  mt-3 mb-3 ">
+      <div class="col bg-white p-5 rounded-end">
+          <h2 class="fw-bold text-center">BITACORA DE MOVIMIENTOS</h2>
+          <h5 class="text-center mb-2"><small>INICIA SESIÓN</small></h5>
+          <form class="needs-validation">
+              <div class="mb-4">
+                  <label >Usuario</label>
+                  <input required ng-model="user.username" type="usuario" class="form-control" name="usuario" placeholder="Usuario">
+              </div>
+              <div class="mb-4">
+                  <label>Contraseña</label>
+                  <input required ng-model="user.pass" type="password" class="form-control" name="password" placeholder="Contraseña">
+              </div>
+              <div class="d-grid">
+                  <button type="submit" class="btn btn-primary" ng-click="ctrlLogin.inicioSesion()">Iniciar sesión</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
