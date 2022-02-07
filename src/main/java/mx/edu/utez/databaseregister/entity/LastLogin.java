@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "last_login")
+@NamedStoredProcedureQuery(name = "LastLogin.procedureEntity",
+     procedureName = "registrar_login", parameters = {
+     @StoredProcedureParameter(mode = ParameterMode.IN, name = "idUser", type = Integer.class)
+ })
 public class LastLogin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

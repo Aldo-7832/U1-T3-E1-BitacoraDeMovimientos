@@ -37,7 +37,16 @@ public class LastLoginController {
     }
 
     @PostMapping(value = "/login/{username}/{pass}")
-    public boolean login(@PathVariable String username, @PathVariable String pass) {
+    public User login(@PathVariable String username, @PathVariable String pass) {
         return lastLoginService.login(username, pass);
+    }
+
+    @PostMapping(value = "/procedure/{id}")
+    public boolean procedimiento(@PathVariable int id) {
+        try{
+            return lastLoginService.procedimiento(id);
+        }catch(Exception e){
+            return true;
+        }
     }
 }

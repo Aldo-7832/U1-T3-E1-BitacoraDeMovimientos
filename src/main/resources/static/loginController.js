@@ -128,6 +128,17 @@ angular.module("routingApp").controller("LoginCtrl", [
         console.log(res.data);
         if (res.data) {
           notyf.success('¡BIENVENIDO!');
+          console.log(res.data);
+          return $http({
+            method: 'POST',
+            url: APP_URL.url + "/lastLogin/procedure/" + res.data.id,
+            headers: {
+            },
+          }).then((res) => {
+            $window.location.href = '#!products';
+          }, (error) => {
+            notyf.error('Ha ocurrido un error inesperado' + error);
+          })
         } else {
           notyf.error('USUARIO INCORRECTO');
         }
@@ -146,6 +157,20 @@ angular.module("routingApp").controller("LoginCtrl", [
       }).then((res) => {
         this.findAll();
         $('#productsTable').DataTable().destroy();
+      }, (error) => {
+        notyf.error('Ha ocurrido un error inesperado' + error);
+      })
+    }
+
+    this.prcedimiento = function(){
+      console.log("Llega al llamado");
+      return $http({
+        method: 'POST',
+        url: APP_URL.url + "/lastLogin/procedure/" + 2,
+        headers: {
+        },
+      }).then((res) => {
+        console.log(res.data);
       }, (error) => {
         notyf.error('Ha ocurrido un error inesperado' + error);
       })

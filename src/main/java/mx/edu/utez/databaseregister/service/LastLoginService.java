@@ -2,6 +2,8 @@ package mx.edu.utez.databaseregister.service;
 
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding.Use;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,25 @@ public class LastLoginService {
         return obj;
     }
 
-    public boolean login(String username, String pass) {
+    public User login(String username, String pass) {
         boolean res = false;
         User obj = lastLoginRepository.loginSession(username, pass);
         System.out.println("USER: " + obj.getUsername());
+        if (!obj.equals(null)) {
+            res = true;
+        }
+        return obj;
+    }
+
+    public boolean procedimiento(int id) {
+        boolean res = false;
+        Object obj = null;
+        try{
+            obj = lastLoginRepository.getTotalCarsByModelEntiy(id);
+        }catch(Exception e){
+            obj = "";
+        }
+        System.out.println("RESPUESTA: "+obj);
         if (!obj.equals(null)) {
             res = true;
         }
