@@ -31,7 +31,7 @@
                         <tr ng-repeat="item in listCommits">
                             <td>{{ $index + 1 }}</td>
                             <td>{{ item.action }}</td>
-                            <td>{{ item.date}}</td>
+                            <td>{{item.date | limitTo: 10}}</td>
                             <td>{{ item.hour}}</td>
                             <td>{{ item.table}}</td>
                         </tr>
@@ -66,7 +66,7 @@
                     <tbody>
                         <tr ng-repeat="itemLogin in listLastLogin">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ itemLogin.date }}</td>
+                            <td>{{ itemLogin.date | limitTo: 10}}</td>
                             <td>{{ itemLogin.hour }}</td>
                             <td>{{ itemLogin.user.username}}</td>
                         </tr>
