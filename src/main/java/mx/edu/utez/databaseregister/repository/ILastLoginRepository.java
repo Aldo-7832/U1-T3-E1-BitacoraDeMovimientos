@@ -16,6 +16,6 @@ public interface ILastLoginRepository extends JpaRepository<LastLogin, Long> {
     // @Query(value = "CALL registrar_login(:id);", nativeQuery = true)
     // String callProcedure(@Param("id") int id);
 
-    @Procedure(name = "LastLogin.procedureEntity")
-    Object getTotalCarsByModelEntiy(@Param("idUser") Integer id);
+    /*@Procedure(name = "LastLogin.procedureEntity")
+    Object getTotalCarsByModelEntiy(@Param("idUser") Integer id);*/
 }

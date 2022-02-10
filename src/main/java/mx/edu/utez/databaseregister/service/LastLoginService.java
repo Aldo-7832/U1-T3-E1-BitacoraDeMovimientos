@@ -2,8 +2,6 @@ package mx.edu.utez.databaseregister.service;
 
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding.Use;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +38,7 @@ public class LastLoginService {
         return obj;
     }
 
-    public boolean procedimiento(int id) {
+    /*public boolean procedimiento(int id) {
         boolean res = false;
         Object obj = null;
         try{
@@ -53,6 +51,6 @@ public class LastLoginService {
             res = true;
         }
         return res;
-    }
+    }*/
 
 }

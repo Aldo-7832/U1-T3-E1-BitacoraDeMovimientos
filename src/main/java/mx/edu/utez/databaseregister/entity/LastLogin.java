@@ -8,10 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "last_login")
-@NamedStoredProcedureQuery(name = "LastLogin.procedureEntity",
+/*@NamedStoredProcedureQuery(name = "LastLogin.procedureEntity",
      procedureName = "registrar_login", parameters = {
      @StoredProcedureParameter(mode = ParameterMode.IN, name = "idUser", type = Integer.class)
- })
+ })*/
 public class LastLogin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

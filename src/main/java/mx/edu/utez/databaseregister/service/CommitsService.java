@@ -17,14 +17,20 @@ public class CommitsService {
         return commitsRepository.findAll();
     }
 
-    public Commits save(Commits commits) {
-        boolean res = false;
-        Commits obj = commitsRepository.save(commits);
-
-        if (!obj.equals(null)) {
-            res = true;
+    public boolean saveCommit(Commits obj) {
+        boolean flag = false;
+        if(obj.getTable().equals("1")){
+            obj.setTable("product");
         }
-        return obj;
+        Commits tmp = commitsRepository.save(obj);
+        if(tmp != null) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public List<Commits> findByOrderByIdDesc() {
+        return commitsRepository.findAllByOrderByIdDesc();
     }
 
 }

@@ -3,7 +3,7 @@ package mx.edu.utez.databaseregister.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +27,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
-    public Product saveCompany(@RequestBody Product obj) {
+    @Transactional
+    public Product saveProduct(@RequestBody Product obj) {
         try {
             return productService.save(obj);
         } catch (Exception e) {
@@ -36,12 +37,10 @@ public class ProductController {
     }
 
     @PostMapping(value = "/delete")
-    public boolean delete(@RequestBody Product product) {
-        System.out.println("NOMBRE: " + product.getName());
+    public boolean delete(@RequestBody Product obj) {
         try {
-            boolean flag = false;
-            flag = productService.delete(product);
-            return flag ? true : false;
+            productService.delete(obj);
+            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;

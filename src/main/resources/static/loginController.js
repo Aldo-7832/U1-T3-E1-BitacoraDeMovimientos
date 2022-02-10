@@ -79,7 +79,7 @@ angular.module("routingApp").controller("LoginCtrl", [
         method: 'GET',
         url: APP_URL.url + "/product",
         headers: {
-        },
+        }, 
       }).then((res) => {
         setTimeout(executeDataTable, 1);
         $scope.listProducts = res.data;
@@ -90,75 +90,118 @@ angular.module("routingApp").controller("LoginCtrl", [
 
     this.create = () => {
       $("#form").prop("disabled", true);
-      return $http({
-        method: "POST",
-        url: APP_URL.url + "/product/save",
-        headers: {
-        },
-        data: $scope.product
-      }).then(res => {
-        console.log(res);
-        if (res.data) {
-
-          if (action == 1) {
-            notyf.success('¡Se ha registrado correctamente el Producto!');
-          } else {
-            notyf.success('¡Se ha actualizado correctamente el Producto!');
-          }
-          location.replace("#!/products");
-        } else {
-          notyf.error('¡Ha ocurrido un error inesperado al guardar el Producto!');
+      let date = new Date();
+      let time = date.toLocaleString('en-US', { hour: 'numeric', hour12: false }) + ":" + date.getMinutes() + ":" + date.getSeconds();
+      if (action == 1) {
+        $scope.commit = {
+          product: $scope.product,
+          user: JSON.parse(this.decode(localStorage.getItem("Usuario"))),
+          date: date,
+          hour: time,
+          action: "Registrar",
+          table: "1"
         }
+      } else {
+        $scope.commit = {
+          product: $scope.product,
+          user: JSON.parse(this.decode(localStorage.getItem("Usuario"))),
+          date: date,
+          hour: time,
+          action: "Actualizar",
+          table: "1"
+        }
+      }
+      $http({
+        method: "POST",
+        url: `${APP_URL.url}/product/save`,
+        headers: {},
+        data: $scope.commit.product
+      }).then((res) => {
+        if(res.data) {
+          if(action == 1) {
+            notyf.success("¡Se ha registrado correctamente el producto!")
+          } else {
+            notyf.success("¡Se ha actualizado correctamente el producto!")
+          }
+          $scope.commit.product = res.data;
+          $http({
+            method: "POST",
+            url: `${APP_URL.url}/commits/save`,
+            headers: {},
+            data: $scope.commit
+          }).then((res) => {
+            if(res.data){
+              $window.location.href = '#!products';
+            }
+          })
+        }
+      })
+    }
 
-      }, e => console.log("Error", e.message));
-    };
 
     this.selectProduct = function (item) {
       productDelete = item;
     }
 
-    this.inicioSesion = function () {
-      user = $scope.user;
+    this.encode = (txt) => {
+      return window.btoa(unescape(encodeURIComponent(txt)));
+    }
+
+    this.decode = (txt) => {
+      return decodeURIComponent(escape(window.atob(txt)));
+    }
+
+    this.inicioSesion = () => {
+      console.log($scope.user);
       return $http({
-        method: 'POST',
-        url: APP_URL.url + "/lastLogin/login/"+$scope.user.username+"/"+$scope.user.pass,
-        headers: {
-        },
+        method: "POST",
+        url: `${APP_URL.url}/users/login`,
+        headers: {},
+        data: $scope.user
       }).then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          notyf.success('¡BIENVENIDO!');
-          console.log(res.data);
-          return $http({
-            method: 'POST',
-            url: APP_URL.url + "/lastLogin/procedure/" + res.data.id,
-            headers: {
-            },
-          }).then((res) => {
-            $window.location.href = '#!products';
-          }, (error) => {
-            notyf.error('Ha ocurrido un error inesperado' + error);
-          })
-        } else {
-          notyf.error('USUARIO INCORRECTO');
+        if(res.data){
+          notyf.success("¡BIENVENIDO!");
+          localStorage.setItem("Usuario", this.encode(JSON.stringify(res.data)));
+          
+          $window.location.href = '#!products';
+        }else{
+          notyf.error("Usuario y/o contraseña incorrectos");
         }
-      }, (error) => {
-        notyf.error('Ha ocurrido un error inesperado');
       })
     }
 
     this.deleteProduct = function () {
-      return $http({
+      let date = new Date();
+      let time = date.toLocaleString('en-US', { hour: 'numeric', hour12: false }) + ":" + date.getMinutes() + ":" + date.getSeconds();
+      $scope.commit = {
+        product: productDelete,
+        user: JSON.parse(this.decode(localStorage.getItem("Usuario"))),
+        date: date,
+        hour: time,
+        action: "Eliminar",
+        table: "1"
+      }
+      $scope.commit.product.status = 0;
+      $http({
         method: 'POST',
-        url: APP_URL.url + "/product/delete",
+        url: APP_URL.url + "/product/save",
         headers: {
         },
-        data: productDelete
+        data: $scope.commit.product
       }).then((res) => {
         this.findAll();
         $('#productsTable').DataTable().destroy();
       }, (error) => {
         notyf.error('Ha ocurrido un error inesperado' + error);
+      })
+      $http({
+        method: "POST",
+        url: `${APP_URL.url}/commits/save`,
+        headers: {},
+        data: $scope.commit
+      }).then((res) => {
+        if(res.data){
+        }
       })
     }
 

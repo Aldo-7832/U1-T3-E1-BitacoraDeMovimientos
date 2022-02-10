@@ -20,16 +20,18 @@ public class CommitsController {
     private CommitsService commitsService;
 
     @GetMapping()
-    public List<Commits> findAlly() {
-        return commitsService.findAll();
+    public List<Commits> findAll() {
+        return commitsService.findByOrderByIdDesc();
     }
 
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
-    public Commits save(@RequestBody Commits obj) {
+    //@Transactional
+    public boolean saveCommit(@RequestBody Commits obj) {
         try {
-            return commitsService.save(obj);
+            return commitsService.saveCommit(obj);
         } catch (Exception e) {
-            return null;
+            return false;
         }
     }
+
 }

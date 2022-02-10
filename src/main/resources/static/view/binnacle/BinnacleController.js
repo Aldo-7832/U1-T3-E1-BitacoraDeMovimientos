@@ -40,6 +40,8 @@ angular.module("routingApp").controller("BinnacleCtrl", [
       }).then((res) => {
         setTimeout(executeDataTable, 1);
         $scope.listCommits = res.data;
+        console.log("commits");
+        console.log($scope.listCommits);
       }).catch((e) => {
         console.log(e);
       })
@@ -54,7 +56,6 @@ angular.module("routingApp").controller("BinnacleCtrl", [
       }).then((res) => {
         setTimeout(executeDataTable2, 1);
         $scope.listLastLogin = res.data;
-        console.log($scope.listLastLogin);
       }).catch((e) => {
         console.log(e);
       })

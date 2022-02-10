@@ -28,6 +28,9 @@ public class Product implements Serializable {
     @Column(name = "description")//
     private String description;
 
+    @Column(name = "status")
+    private int status;
+
     public long getId() {
         return id;
     }
@@ -66,6 +69,14 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     

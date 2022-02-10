@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,16 +20,24 @@ public class Commits implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @OneToOne
+    @JoinColumn(name = "id_product")
+    private Product product;
+
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @Column(name = "date")//
     private Date date;
 
     @Column(name = "hour")//
     private Time hour;
 
-    @Column(name = "action")//
+    @Column(name = "action_name")//
     private String action;
 
-    @Column(name = "table")//
+    @Column(name = "name_table")//
     private String table;
 
     public long getId() {
@@ -36,6 +46,22 @@ public class Commits implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDate() {
