@@ -111,6 +111,7 @@ angular.module("routingApp").controller("LoginCtrl", [
           table: "1"
         }
       }
+      $scope.commit.product.status = 1;
       $http({
         method: "POST",
         url: `${APP_URL.url}/product/save`,
