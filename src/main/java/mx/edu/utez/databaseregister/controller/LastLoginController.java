@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.utez.databaseregister.service.LastLoginService;
+import mx.edu.utez.databaseregister.service.UserService;
 import mx.edu.utez.databaseregister.entity.LastLogin;
+import mx.edu.utez.databaseregister.entity.User;
 
 @RestController
 @RequestMapping(path = "/lastLogin")
@@ -19,9 +21,12 @@ public class LastLoginController {
     @Autowired
     private LastLoginService lastLoginService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping()
-    public List<LastLogin> findAlly() {
-        return lastLoginService.findAll();
+    public List<User> findAlly() {
+        return userService.findAll();
     }
 
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })

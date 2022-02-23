@@ -24,7 +24,7 @@ public class CommitsController {
         return commitsService.findByOrderByIdDesc();
     }
 
-    @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
+    /*@RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
     //@Transactional
     public boolean saveCommit(@RequestBody Commits obj) {
         try {
@@ -32,6 +32,6 @@ public class CommitsController {
         } catch (Exception e) {
             return false;
         }
-    }
+    }*/
 
 }

@@ -68,9 +68,9 @@
                     <tbody>
                         <tr ng-repeat="itemLogin in listLastLogin">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ itemLogin.date | limitTo: 10}}</td>
-                            <td>{{ itemLogin.hour }}</td>
-                            <td>{{ itemLogin.user.username}}</td>
+                            <td>{{ itemLogin.lastDateLogin | limitTo: 10}}</td>
+                            <td>{{ itemLogin.lastHourLogin }}</td>
+                            <td>{{ itemLogin.username}}</td>
                         </tr>
                     </tbody>
                 </table>

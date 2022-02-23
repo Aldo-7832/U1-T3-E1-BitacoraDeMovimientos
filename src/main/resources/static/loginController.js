@@ -124,17 +124,8 @@ angular.module("routingApp").controller("LoginCtrl", [
           } else {
             notyf.success("¡Se ha actualizado correctamente el producto!")
           }
-          $scope.commit.product = res.data;
-          $http({
-            method: "POST",
-            url: `${APP_URL.url}/commits/save`,
-            headers: {},
-            data: $scope.commit
-          }).then((res) => {
-            if(res.data){
-              $window.location.href = '#!products';
-            }
-          })
+          $window.location.href = '#!products';
+          $scope.commit.product = res.data;       
         }
       })
     }
